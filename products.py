@@ -1,13 +1,20 @@
-#read file
+import os # operating system 請問政府大人 載入模組
 
-product =[]
-with open('products.csv','r') as f:
-	for line in f:
-		if 'product,price' in line: #不處理資料中的這一行
-			continue #跳到下一回 不會跳出迴圈
+products =[] #不管有沒有找到檔案, 都要產生空清單
+
+if os.path.isfile('products.csv'): #檢察檔案是否存在  #若不在同一個資料夾，需給完整path
+	print('yeah! file is there')
+	with open('products.csv','r') as f: #read file
+
+		for line in f:
+			if 'product,price' in line: #不處理資料中的這一行
+				continue #跳到下一回 不會跳出迴圈
 		name,price = line.strip().split(',') #strip 移除\n 隱藏換行,split 切割左右data by common
-		product.append([name,price])
-print(product)
+		products.append([name,price])
+	print(products)	
+
+else:
+	print('can not find file......')
 
 #讓使用者輸入
 while True:
